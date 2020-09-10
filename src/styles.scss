@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "Montserrat";
+    src: url("assets/fonts/Montserrat/Montserrat-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Montserrat-smb";
+    src: url("assets/fonts/Montserrat/Montserrat-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Montserrat-md";
+    src: url("assets/fonts/Montserrat/Montserrat-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Montserrat-bd";
+    src: url("assets/fonts/Montserrat/Montserrat-Bold.ttf");
+}
+
+body {
+    margin: 0;
+    padding-top: 17px;
+}

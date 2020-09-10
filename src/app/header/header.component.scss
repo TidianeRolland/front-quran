@@ -1,0 +1,46 @@
+header {
+    display: flex;
+    border-bottom: 1px solid #0000003b;
+    #logo {
+        flex-basis: 40%;
+        padding-left: 25px;
+        font-family: "Montserrat-bd";
+    }
+    nav {
+        flex-basis: 60%;
+        display: flex;
+        .box {
+            font-family: "Montserrat-md";
+            color: rgba(0,0,0,.47);
+            cursor: pointer;
+            outline: none;
+            font-size: .8em;
+            &__left {
+                flex-basis: 12%;
+                
+            }
+
+            &__selected {
+                font-family: "Montserrat-smb";
+                color: rgba(0,0,0,.92);
+
+                span {
+                    display: inline-block;
+                    height: 30px;
+                    position: relative;
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        width: 70%;
+                        bottom: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        border-bottom: 1px solid black;
+                    }
+                }
+            }
+
+        }
+        
+    }
+}
