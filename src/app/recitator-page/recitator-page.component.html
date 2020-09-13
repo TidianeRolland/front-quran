@@ -1,1 +1,17 @@
-<p>recitator-page works!</p>
+<div id="main">
+    <div id="container">
+        <div id="title">
+            <p>Amazing Quran recitators</p>
+        </div>
+
+        <div id="action">
+            <div id="action__bl">
+                <input id="action__bl__search" type="text" placeholder="Search ...">
+            </div>
+        </div>
+
+        <div id="list">
+            <app-recitator-item *ngFor="let r of recitators" [recitator]="r"></app-recitator-item>
+        </div>
+    </div>
+</div>

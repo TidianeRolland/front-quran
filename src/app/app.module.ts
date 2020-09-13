@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { RecitatorPageComponent } from './recitator-page/recitator-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlayingPageComponent } from './playing-page/playing-page.component';
+import { RecitatorItemComponent } from './recitator-item/recitator-item.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PlayingPageComponent } from './playing-page/playing-page.component';
     HeaderComponent,
     RecitatorPageComponent,
     PageNotFoundComponent,
-    PlayingPageComponent
+    PlayingPageComponent,
+    RecitatorItemComponent
   ],
   imports: [
     BrowserModule,
