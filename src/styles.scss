@@ -18,7 +18,22 @@
     src: url("assets/fonts/Montserrat/Montserrat-Bold.ttf");
 }
 
+
+html, body  {height: 100%;}
+
 body {
     margin: 0;
     padding-top: 17px;
+    box-sizing: border-box;
 }
+
+@import '~node_modules/bulma/sass/utilities/initial-variables';
+
+// Set your brand colors
+$progress-value-background-color: black;
+$progress-bar-background-color: white;
+$progress-indeterminate-duration: .5s;
+
+// Update Bulma's global variables
+$primary: $purple;
+@import '~node_modules/bulma/bulma';

@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -8,6 +10,7 @@ import { RecitatorPageComponent } from './recitator-page/recitator-page.componen
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlayingPageComponent } from './playing-page/playing-page.component';
 import { RecitatorItemComponent } from './recitator-item/recitator-item.component';
+import { FormatSecondsPipe } from './format-seconds.pipe';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,13 @@ import { RecitatorItemComponent } from './recitator-item/recitator-item.componen
     RecitatorPageComponent,
     PageNotFoundComponent,
     PlayingPageComponent,
-    RecitatorItemComponent
+    RecitatorItemComponent,
+    FormatSecondsPipe,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
