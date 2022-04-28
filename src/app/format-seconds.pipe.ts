@@ -13,8 +13,8 @@ export class FormatSecondsPipe implements PipeTransform {
   }
 
   formatSecondsAsTime(secs) {
-    let min = Math.floor(secs / 60);
-    let sec = Math.floor(secs - (min * 60));
+    const min = Math.floor(secs / 60);
+    const sec = Math.floor(secs - (min * 60));
 
     let minn = '';
     let secc = '';

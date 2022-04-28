@@ -1,6 +1,6 @@
 export class Surah {
     constructor(
-        public number: 1,
+        public number: number,
         public name: string,
         public transliteration_en: string,
         public translation_en: string,

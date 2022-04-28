@@ -17,10 +17,10 @@ export class PlayingPageComponent implements OnInit, OnDestroy {
   progressState = 0;
   playing = false;
 
-  path = "../../assets";
+  path = '../../assets';
   btnPlayerUrl;
-  btnPlayUrl = "img/btn_play.png";
-  btnPauseUrl = "img/btn_pause.png";
+  btnPlayUrl = 'img/btn_play.png';
+  btnPauseUrl = 'img/btn_pause.png';
 
   player;
   audio;
@@ -31,9 +31,9 @@ export class PlayingPageComponent implements OnInit, OnDestroy {
                     new Song('Sourate An-Nahl', 'http://localhost:5000/surah/16/kalbani'),
                     new Song('Craig David - I Know You', '../../../assets/music/Craig David - I Know You.mp3'),
                     new Song('Cardi B - WAP feat. Megan Thee Stallion', '../../../assets/music/Cardi B - WAP feat. Megan Thee Stallion.mp3'),
-                    new Song("Darina Victry Laisse Moi T'aimer", "../../../assets/music/Darina Victry Laisse Moi T'aimer.mp3"),
-                    new Song("Hakeem Tiana Starlight", "../../../assets/music/Hakeem Tiana Starlight.mp3"),
-                    new Song("Iggy Azalea - Fancy ft. Charli XCX", "../../../assets/music/Iggy Azalea - Fancy ft. Charli XCX.mp3"),
+                    new Song('Darina Victry Laisse Moi T\'aimer', '../../../assets/music/Darina Victry Laisse Moi T\'aimer.mp3'),
+                    new Song('Hakeem Tiana Starlight', '../../../assets/music/Hakeem Tiana Starlight.mp3'),
+                    new Song('Iggy Azalea - Fancy ft. Charli XCX', '../../../assets/music/Iggy Azalea - Fancy ft. Charli XCX.mp3'),
   ];
   currentId = 0;
 
@@ -46,7 +46,7 @@ export class PlayingPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.audio.src = "";
+    this.audio.src = '';
     this.audio.currentTime = 0;
     this.audio = null;
     clearInterval(this.player);
@@ -62,7 +62,7 @@ export class PlayingPageComponent implements OnInit, OnDestroy {
     if (this.playing) {
       // we're playing, so we pause
       this.pauseAudio();
-      clearInterval(this.player)
+      clearInterval(this.player);
       this.playing = false;
       this.btnPlayerUrl = `${this.path}/${this.btnPlayUrl}`;
     } else {
