@@ -1,52 +1,52 @@
 .item {
-    background-color: rgba(207, 165, 243, .18);
-    display: flex;
-    align-items: center;
-    border-radius: 30px;
-    padding: 15px;
-    padding-left: 25px;
-    box-shadow: 0px 0px 5px 1px #08080833;
-    margin-bottom: 25px;
+  background-color: rgba(207, 165, 243, 0.18);
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  padding: 15px;
+  padding-left: 25px;
+  box-shadow: 0px 0px 5px 1px #08080833;
+  margin-bottom: 25px;
 
-    &__bl__photo {
-        flex-basis: 25%;
-        &__img {
-            width: 100px;
-            height: 100px;
-        }
-    }
-
-    &__text {
-        // text-align:center;
-        flex-basis: 45%;
-        font-family: "Montserrat-smb";
-        color: #1B1F3B;
-        font-size: 18px;
-    }
-    &__play {
-        color: white;
-        background-color: #8A0EF5;
-        border-radius: 30px;
-        border: none;
-        padding: 13px;
-        width: 100px;
-        font-family: "Montserrat";
-        cursor: pointer;
-
-        &:hover {
-            transform: translateY(-3px);
-            background-color: #350e58;
-            animation: 2s normal;
-            transition: all ease-in;
-        }
-    }
-
-}
-
-
-
-@media screen and (max-width: 640px) {
-    .item {
-      flex-direction: column;
+  &__bl__photo {
+    flex-basis: 25%;
+    &__img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
     }
   }
+
+  &__text {
+    // text-align:center;
+    flex-basis: 45%;
+    font-family: "Montserrat-smb";
+    color: #1b1f3b;
+    font-size: 18px;
+  }
+  &__play {
+    color: white;
+    background-color: #8a0ef5;
+    border-radius: 30px;
+    border: none;
+    padding: 13px;
+    width: 100px;
+    font-family: "Montserrat";
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-3px);
+      background-color: #350e58;
+      animation: 2s normal;
+      transition: all ease-in;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .item {
+    flex-direction: column;
+  }
+}
