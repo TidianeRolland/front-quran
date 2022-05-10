@@ -1,170 +1,163 @@
 #main {
+  // border: 1px solid;
+  box-sizing: border-box;
+  padding-top: 15px;
+  padding-bottom: 30px;
+  #container {
     // border: 1px solid;
-    box-sizing: border-box;
-    padding-top: 15px;
-    padding-bottom: 30px;
-    height: 90%;
-    #container {
-        // border: 1px solid;
-        width: 100%;
-        display: flex;
-        height: 100%;
+    width: 100%;
+    display: flex;
 
-        #surahs {
-            flex-basis: 70%;
-            text-align: center;
-            height: 80%;
-            #list {
-                margin-top: 15px;
-                width: 40%;
-                margin: 0 auto;
+    #surahs {
+      flex-basis: 70%;
+      text-align: center;
+      height: 80%;
+      #list {
+        width: 50%;
+        margin: 0 auto;
 
-                #basmallah {
-                    img {
-                        width: 130px;
-                    }
-                }
-                
-                #action {
-                    margin-top: 30px;
-                    margin-bottom: 30px;
-    
-                    &__bl {
-                        text-align: left;
-                        &__search {
-                            padding: 5px;
-                            outline: none;
-                            color: black;
-                            font-family: Montserrat;
-                            border: none;
-                            border-bottom: 1px dashed #707070;
-                        }
-                    }
-                }
-                
-                .item { 
-                    background-color: rgba(142, 45, 226, 0.15);
-                    display: flex;
-                    align-items: center;
-                    border-radius: 14px;
-                    margin-bottom: 25px;
-                    padding: 3px;
-                    height: 60px;
-                
-                    &__bl__photo {
-                        flex-basis: 20%;
-                        &__img {
-                            width: 17px;
-                        }
-                    }
-                
-                    &__text {
-                        flex-basis: 45%;
-                        font-family: "Montserrat-smb";
-                        color: #1B1F3B;
-                        font-size: 18px;
-                        text-align: left;
-                    }
-                    
-                }
-            }
-
-            
+        #basmallah {
+          img {
+            width: 130px;
+          }
         }
 
-        #playing {
-            box-sizing: border-box;
-            flex-basis: 25%;
-            min-height: 90%;
-            padding: 15px;
-            #play {
-                box-shadow: 0px 0px 2px 2px #0000004d;
-                box-sizing: border-box;
-                border-radius: 30px;
-                height: 100%;
-                background: #6a3093;
-                background: -webkit-linear-gradient(to right, #a044ff, #6a3093);
-                background: linear-gradient(#8E2DE2, #4A00E0);
-                display: flex;
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-                position: relative;
+        #action {
+          margin-top: 30px;
+          margin-bottom: 30px;
 
-                p {
-                    font-family: "Montserrat-md";
-                    color: white;
-                    font-size: 15px;
-                }
-
-                .bar {
-                    width: fit-content;
-                    border-radius: 100%;
-                    border: 1px solid white;
-                    margin: 0 auto;
-                    padding: 15px;
-                    padding-left: 25px;
-                    padding-right: 25px;
-                    background-color: white;
-                }
-
-                .myprogress {
-                    margin-top: 100px;
-                    .progress.is-small {
-                        height: 0.11rem !important;
-                    }
-                }
-
-                .duration {
-                    color: white;
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .control {
-                    display: flex;
-                    justify-content: space-evenly;
-                    position: absolute;
-                    bottom: 10%;
-                    width: 100%;
-                    left: 0;
-
-                    &__play, &__prev, &__next {
-                        cursor: pointer;
-                        &:hover {
-                            transform: scale(1.05);
-                            animation: 1s normal;
-                            transition: all ease-in;
-                        }
-                    }
-
-
-                    &__play {
-                        width: 85px;
-                    }
-
-                    &__prev, &__next {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        &__img {
-                            height: 50px;
-                        }
-                    }
-                }
+          &__bl {
+            text-align: left;
+            &__search {
+              padding: 5px;
+              outline: none;
+              color: black;
+              font-family: Montserrat;
+              border: none;
+              border-bottom: 1px dashed #707070;
             }
+          }
         }
+
+        .item {
+          background-color: rgba(142, 45, 226, 0.15);
+          display: flex;
+          align-items: center;
+          border-radius: 14px;
+          margin-bottom: 25px;
+          padding: 3px;
+          height: 60px;
+
+          &__bl__photo {
+            flex-basis: 20%;
+            &__img {
+              width: 17px;
+              cursor: pointer;
+            }
+          }
+
+          &__text {
+            flex-basis: 45%;
+            font-family: "Montserrat-smb";
+            color: #1b1f3b;
+            font-size: medium;
+            text-align: left;
+          }
+        }
+      }
     }
-}
 
+    #playing {
+      box-sizing: border-box;
+      flex-basis: 25%;
+      position: fixed;
+      right: 5rem;
+      padding-top: 3rem;
+      #play {
+        box-shadow: 0px 0px 2px 2px #0000004d;
+        box-sizing: border-box;
+        border-radius: 30px;
+        background: #6a3093;
+        background: -webkit-linear-gradient(to right, #a044ff, #6a3093);
+        background: linear-gradient(#8e2de2, #4a00e0);
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem;
+
+        p {
+          font-family: "Montserrat-md";
+          color: white;
+          font-size: 15px;
+        }
+
+        .bar {
+          width: fit-content;
+          border-radius: 100%;
+          border: 1px solid white;
+          margin: 0 auto;
+          padding: 15px;
+          padding-left: 25px;
+          padding-right: 25px;
+          background-color: white;
+        }
+
+        .myprogress {
+          margin-top: 5rem;
+          .progress.is-small {
+            height: 0.11rem !important;
+          }
+        }
+
+        .duration {
+          color: white;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .control {
+          display: flex;
+          justify-content: space-evenly;
+          width: 100%;
+          margin-top: 2rem;
+
+          &__play,
+          &__prev,
+          &__next {
+            cursor: pointer;
+            &:hover {
+              transform: scale(1.05);
+              animation: 1s normal;
+              transition: all ease-in;
+            }
+          }
+
+          &__play {
+            width: 85px;
+            margin-right: 2rem;
+            margin-left: 2rem;
+          }
+
+          &__prev,
+          &__next {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            &__img {
+              height: 50px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 .progress-range {
-    width: 100%;
-    height: 0.11rem !important;
+  width: 100%;
+  height: 0.11rem !important;
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
-
-

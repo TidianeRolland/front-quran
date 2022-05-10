@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div id="list">
+        <div id="list" *ngIf="(recitators$ | async) as recitators">
             <app-recitator-item *ngFor="let r of recitators" [recitator]="r"></app-recitator-item>
         </div>
     </div>

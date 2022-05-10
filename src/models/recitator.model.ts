@@ -1,7 +1,7 @@
 export class Recitator {
-    constructor(
-        public code: string,
-        public name: string,
-        public photoURL: string,
-    ) {}
+  constructor(
+    public id: string,
+    public name: string,
+    public photoURL: string
+  ) {}
 }

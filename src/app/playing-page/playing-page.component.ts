@@ -1,118 +1,151 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Song } from 'src/models/song.model';
-import { Surah } from 'src/models/surah.model';
-import { QuranService } from '../quran.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { Router } from "@angular/router";
+import { combineLatest, Observable } from "rxjs";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  share,
+  startWith,
+} from "rxjs/operators";
+import { Recitator } from "src/models/recitator.model";
+import { Surah } from "src/models/surah.model";
+import { QuranService } from "../quran.service";
 
 @Component({
-  selector: 'app-playing-page',
-  templateUrl: './playing-page.component.html',
-  styleUrls: ['./playing-page.component.scss']
+  selector: "app-playing-page",
+  templateUrl: "./playing-page.component.html",
+  styleUrls: ["./playing-page.component.scss"],
 })
 export class PlayingPageComponent implements OnInit, OnDestroy {
+  constructor(
+    private quranServ: QuranService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
-  constructor(private quranServ: QuranService) { }
-
-  surahs: Surah[];
-
+  surahs$: Observable<Surah[]>;
+  allSurahs$: Observable<Surah[]>;
   progressState = 0;
   playing = false;
-
-  path = '../../assets';
-  btnPlayerUrl;
-  btnPlayUrl = 'img/btn_play.png';
-  btnPauseUrl = 'img/btn_pause.png';
-
   player;
   audio;
   currentTime = 0;
+  surahNo = 1;
+  recitator: Recitator;
 
-  // Dummy player
-  songs: Song[] = [
-                    new Song('Sourate An-Nahl', 'http://localhost:5000/surah/16/kalbani'),
-                    new Song('Craig David - I Know You', '../../../assets/music/Craig David - I Know You.mp3'),
-                    new Song('Cardi B - WAP feat. Megan Thee Stallion', '../../../assets/music/Cardi B - WAP feat. Megan Thee Stallion.mp3'),
-                    new Song('Darina Victry Laisse Moi T\'aimer', '../../../assets/music/Darina Victry Laisse Moi T\'aimer.mp3'),
-                    new Song('Hakeem Tiana Starlight', '../../../assets/music/Hakeem Tiana Starlight.mp3'),
-                    new Song('Iggy Azalea - Fancy ft. Charli XCX', '../../../assets/music/Iggy Azalea - Fancy ft. Charli XCX.mp3'),
-  ];
-  currentId = 0;
+  searchForm = this.fb.group({
+    searchText: [""],
+  });
+
+  searchText$ = this.searchForm
+    .get("searchText")
+    .valueChanges.pipe(
+      startWith(""),
+      distinctUntilChanged(),
+      debounceTime(500)
+    );
 
   ngOnInit() {
-    this.btnPlayerUrl = `${this.path}/${this.btnPlayUrl}`;
+    this.recitator = JSON.parse(localStorage.getItem("recitator"));
+    if (!this.recitator) this.router.navigate(["/home"]);
+
     this.audio = new Audio();
-    this.audio.src = this.songs[this.currentId].srcURL;
     this.audio.load();
-    // this.fetchSurahs();
+    this.fetchSurahs();
   }
 
   ngOnDestroy() {
-    this.audio.src = '';
+    this.audio.src = "";
     this.audio.currentTime = 0;
     this.audio = null;
     clearInterval(this.player);
   }
 
   fetchSurahs() {
-    this.quranServ.getSurahs()
-        .subscribe((data: Surah[]) => this.surahs = data );
+    this.allSurahs$ = this.quranServ.getSurahs().pipe(share());
+    this.surahs$ = combineLatest([this.allSurahs$, this.searchText$]).pipe(
+      map(([surahs, search]) =>
+        surahs.filter((surah) =>
+          surah.transliteration_en.toLowerCase().includes(search.toLowerCase())
+        )
+      )
+    );
   }
 
+  onSelectingSurah(id: number) {
+    this.surahNo = id;
+    this.audio.src = this.quranServ.getSurahURL(
+      this.surahNo,
+      this.recitator.id
+    );
+
+    this.currentTime = 0;
+    this.playAudio();
+  }
 
   play() {
-    if (this.playing) {
-      // we're playing, so we pause
-      this.pauseAudio();
-      clearInterval(this.player);
-      this.playing = false;
-      this.btnPlayerUrl = `${this.path}/${this.btnPlayUrl}`;
-    } else {
-      this.playing = true;
-      this.btnPlayerUrl = `${this.path}/${this.btnPauseUrl}`;
+    if (!this.audio.src) return;
+
+    if (!this.playing) {
       this.playAudio();
-
-      const p = this.updateProgressBar.bind(this);
-      this.player = setInterval(p, 1000);
+    } else {
+      this.pauseAudio();
+      this.currentTime = this.audio.currentTime;
+      clearInterval(this.player);
     }
-
   }
 
   playAudio() {
+    this.playing = true;
     this.audio.currentTime = this.currentTime;
     this.audio.play();
+
+    const p = this.updateProgressBar.bind(this);
+    this.player = setInterval(p, 1000);
   }
 
   pauseAudio() {
+    this.playing = false;
     this.audio.pause();
   }
 
   updateProgressBar() {
     this.currentTime = Math.floor(this.audio.currentTime);
+
     this.progressState = (this.audio.currentTime / this.audio.duration) * 100;
     if (this.progressState === 100) {
-        clearInterval(this.player);
-        this.btnPlayerUrl = `${this.path}/${this.btnPlayUrl}`;
-        this.currentTime = 0;
-        this.playing = false;
-      }
+      clearInterval(this.player);
+      this.next();
+    }
   }
 
-
   next() {
-    this.currentId++;
-    if (this.currentId >= this.songs.length) {
-      this.currentId = 0;
+    this.surahNo = this.surahNo + 1 <= 114 ? this.surahNo + 1 : 1;
+
+    if (this.surahNo >= 1 && this.surahNo <= 114) {
+      this.currentTime = 0;
+      this.audio.src = this.quranServ.getSurahURL(
+        this.surahNo,
+        this.recitator.id
+      );
+      this.playAudio();
     }
-    this.audio.src = this.songs[this.currentId].srcURL;
-    this.audio.play();
   }
 
   prev() {
-    this.currentId--;
-    if (this.currentId <= 0) {
-      this.currentId = 0;
+    this.surahNo--;
+    if (this.surahNo <= 0) {
+      this.surahNo = 1;
     }
-    this.audio.src = this.songs[this.currentId].srcURL;
-    this.audio.play();
+    if (this.surahNo >= 1 && this.surahNo <= 114) {
+      this.currentTime = 0;
+      this.audio.src = this.quranServ.getSurahURL(
+        this.surahNo,
+        this.recitator.id
+      );
+      this.playAudio();
+    }
   }
-
 }
