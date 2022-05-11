@@ -68,7 +68,9 @@ export class PlayingPageComponent implements OnInit, OnDestroy {
     this.surahs$ = combineLatest([this.allSurahs$, this.searchText$]).pipe(
       map(([surahs, search]) =>
         surahs.filter((surah) =>
-          surah.transliteration_en.toLowerCase().includes(search.toLowerCase())
+          `${surah.number} ${surah.transliteration_en.toLowerCase()}`.includes(
+            search.toLowerCase()
+          )
         )
       )
     );
