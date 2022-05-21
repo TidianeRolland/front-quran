@@ -48,6 +48,15 @@
           padding: 3px;
           height: 60px;
 
+          &-active {
+            background-color: cyan !important;
+          }
+
+          &-clickable:hover {
+            transform: translateY(-2px) scale(1.03);
+            transition: all 0.1s ease-out;
+          }
+
           &__bl__photo {
             flex-basis: 20%;
             &__img {
@@ -103,7 +112,7 @@
         }
 
         .myprogress {
-          margin-top: 5rem;
+          margin-top: 2rem;
           .progress.is-small {
             height: 0.11rem !important;
           }
@@ -170,6 +179,32 @@
   }
 }
 
-.item-active {
-  background-color: cyan !important;
+.inputRange {
+  width: 100%;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-runnable-track {
+    background: white;
+    height: 0.1rem;
+  }
+
+  /******** Firefox ********/
+  &::-moz-range-track {
+    background: white;
+    height: 0.1rem;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -0.3rem; /* Centers thumb on the track */
+    background-color: #5cd5eb;
+    height: 0.7rem;
+    width: 1.2rem;
+    border-radius: 80%;
+  }
 }

@@ -1,12 +1,13 @@
 <div id="main">
   <div
     id="container"
+    [formGroup]="searchForm"
     *ngIf="{
       surahs: surahs$ | async,
       allSurahs: allSurahs$ | async
     } as observables"
   >
-    <div id="surahs" [formGroup]="searchForm">
+    <div id="surahs">
       <div id="list">
         <div id="basmallah">
           <img src="../../assets/img/Basmallah.png" alt="" />
@@ -25,15 +26,14 @@
 
         <div>
           <div
-            class="item"
+            class="item item-clickable"
+            style="cursor: pointer"
             *ngFor="let surah of observables.surahs; let i = index"
             [ngClass]="{ 'item-active': surahNo === surah.number && playing }"
+            (click)="onSelectingSurah(surah.number)"
           >
             <ng-container>
-              <div
-                (click)="onSelectingSurah(surah.number)"
-                class="item__bl__photo"
-              >
+              <div class="item__bl__photo">
                 <img
                   class="item__bl__photo__img"
                   src="../../assets/img/play.png"
@@ -74,11 +74,20 @@
         <p>{{ surahNo }} / {{ observables.allSurahs.length }}</p>
 
         <div class="myprogress">
-          <progress
+          <!-- <progress
             class="progress is-small"
             [value]="progressState"
             max="100"
-          ></progress>
+          ></progress> -->
+          <input
+            class="inputRange"
+            formControlName="selectTime"
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            (click)="onSelectTime()"
+          />
         </div>
 
         <div class="duration">

@@ -37,6 +37,7 @@ export class PlayingPageComponent implements OnInit, OnDestroy {
 
   searchForm = this.fb.group({
     searchText: [""],
+    selectTime: [0],
   });
 
   searchText$ = this.searchForm
@@ -121,6 +122,12 @@ export class PlayingPageComponent implements OnInit, OnDestroy {
       clearInterval(this.player);
       this.next();
     }
+    this.searchForm.get("selectTime").patchValue(Math.ceil(this.progressState));
+  }
+
+  onSelectTime() {
+    const momentSelected = this.searchForm.get("selectTime").value;
+    this.audio.currentTime = (momentSelected * this.audio.duration) / 100;
   }
 
   next() {
